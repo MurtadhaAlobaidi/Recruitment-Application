@@ -7,8 +7,7 @@ const Competence = require('./competence.model') // Competence table connection
  * Competence_profile table in the database, consists of 
  * persons comeptences.
  */
-const CompetenceProfile = db.define(
-  'competence_profile',
+const CompetenceProfile = db.define('competence_profile',
   {
     competence_profile_id: {
       type: Sequelize.INTEGER,

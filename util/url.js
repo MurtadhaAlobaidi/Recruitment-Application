@@ -1,4 +1,4 @@
-
+// Route URLS
 const auth_LOGIN = "/auth/login";
 const auth_REGISTER = "/auth/register";
 const auth_FORGET_PASSWORD_1 = "/auth/forgotten-password-part1";
@@ -8,6 +8,7 @@ const application_APPLICATION_FORM = "/application/application-form";
 const application_APPLICATIONS = "/application/applications";
 const application_SHOW_APPLICATION = "/application/show-application";
 
+// Database conncection string
 const dataBaseConnectionString = "postgres://" + process.env.USER + ":" + process.env.PASSWORD + "@" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_NAME;
 
 

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../model/person.model');
+const { application_APPLICATION_FORM } = require("../util/url");
+
 
 /**
  * Function used for authorizing users, verifies JWTs which are given when login.
@@ -13,13 +15,13 @@ const authenticated = (req, res, next) => {
   const token = req.cookies.Authenticate
 
   if (token == null) {
-    return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/login')
+    return res.redirect(auth_LOGIN)
   }
 
   jwt.verify(token, process.env.JWT_TOKEN, (err, _id) => {
     if (err) {
       console.log(err)
-      return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/login')
+      return res.redirect(auth_LOGIN)
     }
 
     User.findOne({
@@ -45,14 +47,11 @@ const adminAccess = (roleId) => {
   return function(req, res, next) {
     if (req.user.role_id !== roleId) {
       return res.status(403)
-      .cookie('Authenticate', null)
-      .redirect('/iv1201-recruitmenapp/us-central1/app/auth/login')
-      
+      .redirect(application_APPLICATION_FORM)   
     }
     next();
   }
 }
-
 
 module.exports =  { authenticated, adminAccess };
 

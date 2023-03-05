@@ -8,73 +8,73 @@ const Role = require('./role.model') // Role model
  * Person table in the database.
  */
 const Person = db.define("person", 
-{ 
-    person_id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    name: {
-        type: Sequelize.STRING,
-        required: true,
-        validate: {
-            is: /^[a-öA-Ö]+$/,
-            notEmpty: true,
-        }
-    },
-    surname: {
-        type: Sequelize.STRING,
-        required: true,
-        validate: {
-            is: /^[a-öA-Ö]+$/,
-            notEmpty: true,
-        }
-    },
-    pnr: {
-        type: Sequelize.STRING,
-        required: true,
-        unique: true,
-        validate: {
-            is: /^\d{8}-\d{4}$/,
-        }
-    },
-    email: {
-        type: Sequelize.STRING,
-        required: true,
-        unique: true,
-        validate: {
-            isEmail: true,
-            isLowercase: true
-        }
-    },
-    password: {
-        type: Sequelize.STRING,
-        required: true,
-    },
-    role_id: {
-        type: Sequelize.INTEGER,
-        required: true,
-        validate: {
-            isValidRoleId: function (value) {
-                return Role.findOne({ where: { role_id: value } })
-                    .then(role => {
-                        if (!role) {
-                            throw new Error("Invalid role_id");
-                        }
-                    });
+    { 
+        person_id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        name: {
+            type: Sequelize.STRING,
+            required: true,
+            validate: {
+                is: /^[a-öA-Ö]+$/,
+                notEmpty: true,
             }
-        }
-    }, 
-    username: {
-        type: Sequelize.STRING,
-        unique: true,
-        required: true,
-    }, 
-},
-{
-    tableName: "person",
-    timestamps: false
-}
+        },
+        surname: {
+            type: Sequelize.STRING,
+            required: true,
+            validate: {
+                is: /^[a-öA-Ö]+$/,
+                notEmpty: true,
+            }
+        },
+        pnr: {
+            type: Sequelize.STRING,
+            required: true,
+            unique: true,
+            validate: {
+                is: /^\d{8}-\d{4}$/,
+            }
+        },
+        email: {
+            type: Sequelize.STRING,
+            required: true,
+            unique: true,
+            validate: {
+                isEmail: true,
+                isLowercase: true
+            }
+        },
+        password: {
+            type: Sequelize.STRING,
+            required: true,
+        },
+        role_id: {
+            type: Sequelize.INTEGER,
+            required: true,
+            validate: {
+                isValidRoleId: function (value) {
+                    return Role.findOne({ where: { role_id: value } })
+                        .then(role => {
+                            if (!role) {
+                                throw new Error("Invalid role_id");
+                            }
+                        });
+                }
+            }
+        }, 
+        username: {
+            type: Sequelize.STRING,
+            unique: true,
+            required: true,
+        }, 
+    },
+    {
+        tableName: "person",
+        timestamps: false
+    }
 );
 
 // Adds a beforeCreate hook to hash the password

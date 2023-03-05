@@ -6,8 +6,7 @@ const Person = require('./person.model')
 /**
  * Applications table in the database, stores info about applications.
  */
-const ApplicationsStatus = db.define(
-    'applications',
+const ApplicationsStatus = db.define('applications',
     {
         applications_id: {
             type: Sequelize.INTEGER,

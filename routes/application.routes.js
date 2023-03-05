@@ -7,10 +7,7 @@ const { authenticated, adminAccess } = require('../middleware/auth.middleware');
 const selectLanguage = require('../middleware/languageChanger.middleware');
 const { registerAvailability, registerCompetence, calculate, getAllCompetences, getAllAvailability, getAllApplicant, getAllApplicationsStatus } = require('../controller/application.controller');
 const { db } = require('../db');
-const { 
-  application_APPLICATION_FORM,
-  application_APPLICATIONS
-} = require("../util/url");
+const { application_APPLICATION_FORM, application_APPLICATIONS } = require("../util/url");
 
 const router = express.Router();
 
@@ -50,7 +47,7 @@ router
   })
 
   .post('/applications', requireRole1,
-    [],
+
     async (req, res) => {
 
       return res.redirect(application_APPLICATIONS);

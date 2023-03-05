@@ -5,8 +5,7 @@ const Person = require('./person.model')
 /**
  * Availability table in the database, used to store peoples availabilities.
  */
-const Availability = db.define(
-  'availability',
+const Availability = db.define('availability',
   {
     availability_id: {
       type: Sequelize.INTEGER,
