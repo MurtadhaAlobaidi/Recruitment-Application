@@ -15,9 +15,11 @@ const connectToDb = (req, res, next) => {
             next();
         })
         .catch((error) => {
+            console.error('Error connecting to database:', error);
             req.flash('error', 'Unable to connect to the database');
-            next(error);
+            next();
         });
 };
+
 
 module.exports = connectToDb;

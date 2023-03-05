@@ -27,7 +27,7 @@ app.set('view engine', 'ejs')
 app.use(session({
   secret: 'your secret',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new MemoryStore({
     checkPeriod: 86400000 // 1 day
   }),
@@ -35,6 +35,11 @@ app.use(session({
 
 // framework for flashing messages in the app
 app.use(flash())
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 // CSS files
 app.use('/assets', express.static('assets'))
