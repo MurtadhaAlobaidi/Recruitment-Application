@@ -237,7 +237,7 @@ router
 
   .get("/forgotten-password-admin", (req, res, next) => {
 
-    res.render(forgotten-password-admin, {
+    res.render("forgotten-password-admin", {
         error: req.flash("error"), 
         success: req.flash('success'),
         form_error: req.flash("form-error"),
