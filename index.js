@@ -45,6 +45,7 @@ app.use((req, res, next) => {
 app.use('/assets', express.static('assets'))
 
 // App Routes
+app.get('/', (req, res) => {res.redirect("/auth/login")})
 app.use('/auth', require('./routes/auth.routes'))
 app.use('/application', require('./routes/application.routes'))
 app.use((req, res) => { res.status(404).render("404") });

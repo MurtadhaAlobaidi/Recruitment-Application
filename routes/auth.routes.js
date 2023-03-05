@@ -37,6 +37,13 @@ router
       });
   })
 
+  .get("/", (req, res, next) => {
+
+    res.redirect(auth_LOGIN);
+    
+  })
+
+
   .post("/login", 
 
     [
