@@ -42,10 +42,7 @@ app.use('/assets', express.static('assets'))
 // App Routes
 app.use('/auth', require('./routes/auth.routes'))
 app.use('/application', require('./routes/application.routes'))
-
-app.use((req, res) => {
-  res.status(404).render("404");
-});
+app.use((req, res) => { res.status(404).render("404") });
 
 // Loggers
 app.use(loginManyAttemptsLogger);
