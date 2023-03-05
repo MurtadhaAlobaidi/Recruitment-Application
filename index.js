@@ -20,7 +20,9 @@ app.use(connectToDb);
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
-app.set('view engine', 'ejs') // framework for view files
+
+// framework for view files
+app.set('view engine', 'ejs') 
 
 app.use(session({
   secret: 'your secret',
@@ -31,6 +33,7 @@ app.use(session({
   }),
 }));
 
+// framework for flashing messages in the app
 app.use(flash())
 
 // CSS files
