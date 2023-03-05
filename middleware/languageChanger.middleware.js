@@ -1,5 +1,5 @@
-const english = require('../lang/english.lang');
-const swedish = require('../lang/swedish.lang');
+const english = require('../lang/english.lang.JSON');
+const swedish = require('../lang/swedish.lang.JSON');
 const Competence = require('../model/competence.model');
 const Sequelize = require('sequelize')
 
