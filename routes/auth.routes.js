@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const _ = require("lodash");
-const { fullUrl, originalURL } = require("../util/url");
 const { check, validationResult } = require('express-validator');
 const { formErrorFormatter } = require("../util/errorFormatter");
 const selectLanguage  = require('../middleware/languageChanger.middleware')
@@ -11,6 +10,15 @@ const {db} = require('../db');
 const Person = require('../model/person.model');
 const Code_Vault = require('../model/code_vault.model');
 const Sequelize = require('sequelize');
+const { 
+  auth_LOGIN,
+  auth_REGISTER,
+  auth_FORGET_PASSWORD_1,
+  auth_FORGET_PASSWORD_2,
+  auth_FORGET_PASSWORD_ADMIN,
+  application_APPLICATION_FORM,
+  application_APPLICATIONS
+} = require("../util/url");
 
 const router = Router()
 
@@ -56,7 +64,7 @@ router
 
     if (errors.errors.length > 0) {
       req.flash("form-error", formErrorFormatter(errors));
-      return res.redirect("/iv1201-recruitmenapp/us-central1/app/auth/login");
+      return res.redirect(auth_LOGIN);
     }
   
     await db.transaction(t => {
@@ -68,21 +76,21 @@ router
             return res
               .status(200)
               .cookie("Authenticate", token)
-              .redirect("/iv1201-recruitmenapp/us-central1/app/application/applications");
+              .redirect(application_APPLICATIONS);
           }
           if (user.role_id == "2") {
             const token = jwt.sign(user.person_id, process.env.JWT_TOKEN);
             return res
               .status(200)
               .cookie("Authenticate", token)
-              .redirect("/iv1201-recruitmenapp/us-central1/app/application/application-form");
+              .redirect(application_APPLICATION_FORM);
           }
           
         })
         .catch((error) => {
           req.flash('error', 'Login Failed, check your login credentials')
           errorLogger(error, req, res, () => {
-            return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/login');
+            return res.redirect(auth_LOGIN);
           });
         });
           
@@ -93,13 +101,13 @@ router
   .get('/logout', (req, res, next) => {
     return res
       .cookie('Authenticate', null)
-      .redirect('/iv1201-recruitmenapp/us-central1/app/auth/login')
+      .redirect(auth_LOGIN)
   })
 
   /*Forgotten password routes*/
   .get("/forgotten-password-part1", (req, res, next) => {
 
-    res.render('forgotten-password-part1', {
+    res.render("forgotten-password-part1", {
         error: req.flash("error"), 
         success: req.flash('success'),
         form_error: req.flash("form-error"),
@@ -127,7 +135,7 @@ router
     const errors = validationResult(req);
     if (errors.errors.length > 0) {
       req.flash('form-error', formErrorFormatter(errors));
-      return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-part1');
+      return res.redirect(auth_FORGET_PASSWORD_1);
     }
 
     try {
@@ -138,7 +146,7 @@ router
           const randomCode = codeVault.code;
           req.flash('success', 'A code has been sent to your email.');
           fake_mailLogger(randomCode, req, res, () => {
-            res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-part2');
+            res.redirect(auth_FORGET_PASSWORD_2);
           });
         } else {
           throw new Error('Code Vault not created');
@@ -147,14 +155,14 @@ router
     } catch (error) {
         errorLogger(error, req, res, () => {
           req.flash('error', 'The entered personal number cant be found');
-          return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-part1');
+          return res.redirect(auth_FORGET_PASSWORD_1);
         });
       }
   })
 
   .get("/forgotten-password-part2", (req, res, next) => {
 
-    res.render('forgotten-password-part2', {
+    res.render(forgotten-password-part2, {
         error: req.flash("error"), 
         success: req.flash('success'),
         form_error: req.flash("form-error"),
@@ -208,20 +216,20 @@ router
     const errors = validationResult(req);
     if (errors.errors.length > 0) {
       req.flash("form-error", formErrorFormatter(errors));
-      return res.redirect("/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-part2");
+      return res.redirect(auth_FORGET_PASSWORD_2);
     }
 
     await db.transaction((t) => {
         return changePassword(code, password)
           .then(() => {
             req.flash('success', 'Password changed successfully. Please login with your new password.');
-            return res.redirect("/iv1201-recruitmenapp/us-central1/app/auth/login");
+            return res.redirect(auth_LOGIN);
 
           })
           .catch((error) => {
             errorLogger(error, req, res, () => {
               req.flash('error', 'Make sure that you have entered the right code')
-              return res.redirect("/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-part2");
+              return res.redirect(auth_FORGET_PASSWORD_2);
             });
           });
       })
@@ -229,7 +237,7 @@ router
 
   .get("/forgotten-password-admin", (req, res, next) => {
 
-    res.render('forgotten-password-admin', {
+    res.render(forgotten-password-admin, {
         error: req.flash("error"), 
         success: req.flash('success'),
         form_error: req.flash("form-error"),
@@ -264,7 +272,7 @@ router
     const errors = validationResult(req);
     if (errors.errors.length > 0) {
       req.flash('form-error', formErrorFormatter(errors));
-      return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-admin');
+      return res.redirect(auth_FORGET_PASSWORD_ADMIN);
     }
 
     try {
@@ -275,7 +283,7 @@ router
           const randomCode = codeVault.code;
           req.flash('success', 'A code has been sent to your email.');
           fake_mailLogger(randomCode, req, res, () => {
-            res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-part2');
+            res.redirect(auth_FORGET_PASSWORD_2);
           });
         } else {
           throw new Error('Code Vault not created');
@@ -284,7 +292,7 @@ router
     } catch (error) {
         errorLogger(error, req, res, () => {
           req.flash('error', 'The entered username cant be found');
-          return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/forgotten-password-admin');
+          return res.redirect(auth_FORGET_PASSWORD_ADMIN);
         });
       }
   })
@@ -379,7 +387,7 @@ router
       const errors = validationResult(req)
       if (errors.errors.length > 0) {
         req.flash('form-error', formErrorFormatter(errors))
-        return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/register')
+        return res.redirect(auth_REGISTER)
       }
 
       await db.transaction(t => {
@@ -396,13 +404,13 @@ router
           .then((person) => {
             if (person) {
               req.flash('success', 'Your account has been created, please login');
-              return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/login')
+              return res.redirect(auth_LOGIN)
             }
           })
           .catch((error) => {
             errorLogger(error, req, res, () => {
               req.flash('error', "There're problems registering your account at this moment, please try again.")
-              return res.redirect('/iv1201-recruitmenapp/us-central1/app/auth/register')
+              return res.redirect(auth_REGISTER)
             })
           })
       })

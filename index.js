@@ -1,6 +1,5 @@
 require('dotenv').config() // init dotenv
 const _= require("lodash"); // init lodash
-const functions = require("firebase-functions"); // init firebase functions
 const express = require("express"); // init express
 const cookieParser = require("cookie-parser");
 const session = require("express-session"); // init session
@@ -9,8 +8,10 @@ const connectToDb = require('./middleware/dbConnect.middleware'); // connects to
 const { requestLogger, queryLogger, errorLogger, loginManyAttemptsLogger } = require('./middleware/logger.middleware'); // loggers used
 const MemoryStore = require('memorystore')(session)
 const { hashUnhashedPasswords } = require('./controller/person.controller')
+const http = require("http");
 
 const app = express()
+const PORT = process.env.PORT || 3000;
 
 // Connection to db
 app.use(connectToDb);
@@ -57,5 +58,10 @@ setInterval(() => {
   hashUnhashedPasswords();
 }, 30000);
 
-exports.app = functions.https.onRequest(app);
 
+
+const server = http.createServer(app)
+
+server.listen(PORT, () => {
+  console.log("Server is running on port: " + PORT);
+});

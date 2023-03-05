@@ -7,6 +7,10 @@ const { authenticated, adminAccess } = require('../middleware/auth.middleware');
 const selectLanguage = require('../middleware/languageChanger.middleware');
 const { registerAvailability, registerCompetence, calculate, getAllCompetences, getAllAvailability, getAllApplicant, getAllApplicationsStatus } = require('../controller/application.controller');
 const { db } = require('../db');
+const { 
+  application_APPLICATION_FORM,
+  application_APPLICATIONS
+} = require("../util/url");
 
 const router = express.Router();
 
@@ -49,7 +53,7 @@ router
     [],
     async (req, res) => {
 
-      return res.redirect('/iv1201-recruitmenapp/us-central1/app/application/applications');
+      return res.redirect(application_APPLICATIONS);
     })
 
   /*Application-form*/
@@ -85,7 +89,7 @@ router
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
         req.flash('form-error', formErrorFormatter(errors))
-        return res.redirect('/iv1201-recruitmenapp/us-central1/app/application/application-form')
+        return res.redirect(application_APPLICATION_FORM)
       }
 
       try {
@@ -116,12 +120,12 @@ router
         })
 
         req.flash('success', 'Your application was sent successfully')
-        res.redirect('/iv1201-recruitmenapp/us-central1/app/application/application-form')
+        res.redirect(application_APPLICATION_FORM)
 
       } catch (error) {
         errorLogger(error, req, res, () => {
           req.flash('error', "Fill out the form correctly")
-          return res.redirect('/iv1201-recruitmenapp/us-central1/app/application/application-form')
+          return res.redirect(application_APPLICATION_FORM)
         })
       }
 

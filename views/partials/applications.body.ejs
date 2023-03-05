@@ -23,7 +23,7 @@
         <td><%= data.applicationsStatus.status %></td>
         <td>
           <form></form>
-          <form class="show-application-form" action="/iv1201-recruitmenapp/us-central1/app/application/show-application" method="get">
+          <form class="show-application-form" action="/application/show-application" method="get">
             <input type="hidden" name="availability_id" value="<%= data.availability.availability_id %>">
             <input type="hidden" name="person_id" value="<%= data.applicationsStatus.person_id %>">
             <button type="submit" class="show-application-button"><%= language['SHOW_APPLICATION'] %></button>
