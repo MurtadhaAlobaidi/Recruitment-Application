@@ -17,3 +17,6 @@ db = new Sequelize(URI, {
 });
 
 module.exports = { db };
+
+
+
