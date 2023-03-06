@@ -2,9 +2,9 @@ const dbEngine = process.env.DB_ENVIRONMENT || "dataBaseConnectionString "
 const { dataBaseConnectionString } = require("./util/url")[dbEngine];
 const { Sequelize } = require('sequelize');
 
-const db = new Sequelize(dataBaseConnectionString, {
-    logging: false // disable logging for all queries
-});
+// const db = new Sequelize(dataBaseConnectionString, {
+//     logging: false // disable logging for all queries
+// });
 
 // db.sync()
 //     .then(() => {
