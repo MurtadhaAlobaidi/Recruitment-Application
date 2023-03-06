@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-
+console.log(process.env.DATABASE_URL);
 const URI =
     process.env.DATABASE_URL ||
     "postgres://murtadha:Mortza2050@localhost:5434/iv1201_recruitment";
