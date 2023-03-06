@@ -8,6 +8,13 @@
   "engines": {
     "node": "16"
   },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
+  },
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^5.1.0",
