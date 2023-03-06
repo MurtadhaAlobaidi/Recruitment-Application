@@ -21,9 +21,6 @@ module.exports = {
     auth_FORGET_PASSWORD_ADMIN,
     application_APPLICATION_FORM,
     application_APPLICATIONS,
-    production: {
-        client: 'pg',
-        connection: process.env.DATABASE_URL
-    }
+
 
 }
