@@ -12,7 +12,7 @@ const application_SHOW_APPLICATION = "/application/show-application";
 const dataBaseConnectionString = "postgres://" + process.env.USER + ":" + process.env.PASSWORD + "@" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_NAME;
 
 
-module.exports = {  
+module.exports = {
     dataBaseConnectionString,
     auth_LOGIN,
     auth_REGISTER,
@@ -20,5 +20,10 @@ module.exports = {
     auth_FORGET_PASSWORD_2,
     auth_FORGET_PASSWORD_ADMIN,
     application_APPLICATION_FORM,
-    application_APPLICATIONS
+    application_APPLICATIONS,
+    production: {
+        client: 'pg',
+        connection: process.env.DATABASE_URL
+    }
+
 }
