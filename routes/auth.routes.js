@@ -170,7 +170,7 @@ router
 
   .get("/forgotten-password-part2", (req, res, next) => {
 
-    res.render(forgotten - password - part2, {
+    res.render("forgotten-password-part2", {
       error: req.flash("error"),
       success: req.flash('success'),
       form_error: req.flash("form-error"),
