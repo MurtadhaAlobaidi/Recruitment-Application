@@ -25,5 +25,5 @@
 //                 process.exit(1); // Exit with an error code
 //             });
 //     });
-const { db } = require('./dbconfig');
-module.exports = { db };
+// const { db } = require('./dbconfig');
+// module.exports = { db };

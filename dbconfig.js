@@ -1,8 +1,9 @@
 const { Sequelize } = require("sequelize");
+const { dataBaseConnectionString } = require('./util/url')
 console.log(process.env.DATABASE_URL);
 const URI =
     process.env.DATABASE_URL ||
-    "postgres://murtadha:Mortza2050@localhost:5434/iv1201_recruitment";
+    dataBaseConnectionString;
 
 db = new Sequelize(URI, {
     logging: false,

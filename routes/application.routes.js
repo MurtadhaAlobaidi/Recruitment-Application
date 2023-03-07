@@ -6,7 +6,7 @@ const { requestLogger, queryLogger, errorLogger } = require('../middleware/logge
 const { authenticated, adminAccess } = require('../middleware/auth.middleware');
 const selectLanguage = require('../middleware/languageChanger.middleware');
 const { registerAvailability, registerCompetence, calculate, getAllCompetences, getAllAvailability, getAllApplicant, getAllApplicationsStatus } = require('../controller/application.controller');
-const { db } = require('../db');
+const { db } = require('../dbconfig');
 const { application_APPLICATION_FORM, application_APPLICATIONS } = require("../util/url");
 
 const router = express.Router();

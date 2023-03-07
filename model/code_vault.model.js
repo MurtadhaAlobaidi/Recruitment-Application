@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize'); // ORM for connection with postgres
-const {db} = require('../db'); // Connection to database
+const {db} =require('../dbconfig'); // Connection to database
 const Person = require('./person.model'); //Connection to Person table
 
 /**
