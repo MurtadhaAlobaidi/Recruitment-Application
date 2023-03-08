@@ -9,17 +9,19 @@ const { db } = require('../dbconfig');
  * @param {*} next 
  */
 const connectToDb = (req, res, next) => {
+    //db.close()
     db.authenticate()
         .then(() => {
+            console.log("Database connection has been established successfully.\n");
             req.db = db;
             next();
         })
         .catch((error) => {
-            console.error('Error connecting to database:', error);
-            req.flash('error', 'Unable to connect to the database');
-            next();
+            console.log('Error connecting to database:', error);
+            res.status(500)
+            .render("500")
+            next(error);
         });
 };
 
-
-module.exports = connectToDb;
+module.exports =  connectToDb;

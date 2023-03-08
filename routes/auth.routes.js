@@ -26,6 +26,12 @@ router.use(requestLogger, queryLogger, errorLogger, selectLanguage, loginManyAtt
 
 router
 
+  .get("/", (req, res, next) => {
+
+    res.redirect(auth_LOGIN);
+
+  })
+
   /*Login routes*/
   .get("/login", (req, res, next) => {
 
@@ -36,13 +42,6 @@ router
       cookie: null
     });
   })
-
-  .get("/", (req, res, next) => {
-
-    res.redirect(auth_LOGIN);
-
-  })
-
 
   .post("/login",
 
