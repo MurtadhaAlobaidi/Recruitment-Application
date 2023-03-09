@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 180px;
+
 }
 #signin{
     padding-top: 40px;
@@ -58,9 +59,11 @@ label {
 #email input {
     border: none;
     background-color: rgb(233, 233, 233);  
+    width: 260px;
 }
 #email input:focus {
     outline: none;
+    width: 260px;
 }
 #password {
     display: flex;
@@ -72,9 +75,12 @@ label {
 #password input {
     border: none;
     background-color: rgb(233, 233, 233);  
+    width: 260px;
+   
 }
 #password input:focus {
     outline: none;
+    width: 260px; 
 }
 #confirmPassword {
     display: flex;
@@ -85,10 +91,12 @@ label {
 }
 #confirmPassword input {
     border: none;
-    background-color: rgb(233, 233, 233);  
+    background-color: rgb(233, 233, 233); 
+    width: 260px; 
 }
 #confirmPassword input:focus {
     outline: none;
+    width: 260px;
 }
 #username {
     display: flex;
@@ -100,9 +108,11 @@ label {
 #username input {
     border: none;
     background-color: rgb(233, 233, 233);  
+    width: 260px;
 }
 #username input:focus {
     outline: none;
+    width: 260px;
 }
 #pnr {
     display: flex;
@@ -110,13 +120,16 @@ label {
     background-color: rgb(233, 233, 233); 
     border-radius: 5px;
     padding: 5px;
+    width: 260px;
 }
 #pnr input {
     border: none;
-    background-color: rgb(233, 233, 233);  
+    background-color: rgb(233, 233, 233);
+    width: 260px;  
 }
 #pnr input:focus {
     outline: none;
+    width: 260px;
 }
 #name {
     display: flex;
@@ -124,13 +137,16 @@ label {
     background-color: rgb(233, 233, 233); 
     border-radius: 5px;
     padding: 5px;
+    width: 260px;
 }
 #name input {
     border: none;
     background-color: rgb(233, 233, 233);  
+    width: 260px;
 }
 #name input:focus {
     outline: none;
+    width: 260px;
 }
 #surname {
     display: flex;
@@ -142,7 +158,9 @@ label {
 #surname input {
     border: none;
     background-color: rgb(233, 233, 233);  
+    width: 260px;
 }
 #surname input:focus {
     outline: none;
+    width: 260px;
 }
