@@ -12,7 +12,7 @@ const english =
     "ALREADY_REGISTERED_USER": "Already Registered User? Click here to login",
     "USERNAME_PLACE_HOLDER": "Username",
     "EMAIL_PLACE_HOLDER": "Email",
-    "PASSWORD_PLACE_HOLDER": "Password",
+    "PASSWORD_PLACE_HOLDER": "Password (8 symbol or more)",
     "CONFIRM_PASSWORD_PLACE_HOLDER": "Confirm Password",
     "PERSONAL_NUMBER_PLACE_HOLDER": "YYYYMMDD-XXXX",
     "FIRST_NAME_PLACE_HOLDER": "First name",
