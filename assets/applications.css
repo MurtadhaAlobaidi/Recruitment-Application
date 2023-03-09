@@ -1,3 +1,5 @@
+/* Desktop/tablet styles */
+
 .application-table {
   border-collapse: collapse;
   width: 100%;
@@ -19,4 +21,24 @@
 .show-application-button {
   display: block;
   margin: auto;
+}
+
+/* Mobile styles */
+
+@media screen and (max-width: 600px) {
+  .application-table th,
+  .application-table td {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .application-table th {
+    text-align: center;
+  }
+  
+  .show-application-button {
+    display: block;
+    margin: 20px auto;
+  }
 }
